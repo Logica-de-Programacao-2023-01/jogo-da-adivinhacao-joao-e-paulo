@@ -1,0 +1,54 @@
+package main
+
+import (
+	"fmt"
+	"math/rand"
+)
+
+func main() {
+
+	fmt.Println("Bem vindo ao jogo de adivinhação!")
+
+	play := true
+	var allTent [][]int
+
+	for play {
+		res := rand.Intn(100) + 1
+		fmt.Println("Qual o número entre 1 e 100? ")
+
+		var tentativas []int
+		adv := 0
+
+		for adv != res {
+			fmt.Println("Adivinhe o número: ")
+			fmt.Scan(&adv)
+
+			tentativas = append(tentativas, adv)
+
+			if adv > res {
+				fmt.Println("Tente um número menor")
+			}
+			if adv < res {
+				fmt.Println("Tente um número maior")
+
+			}
+		}
+
+		fmt.Printf("Parabéns você acertou o número em %d tentativas.\n", len(tentativas))
+		allTent = append(allTent, tentativas)
+
+		fmt.Println("Deseja jogar novamente? (1.Sim/2.Não): ")
+		var plAgainsn int
+		fmt.Scan(&plAgainsn)
+		if plAgainsn == 1 {
+			fmt.Println()
+		}
+		if plAgainsn == 2 {
+			fmt.Println("Histórico de tentativas:")
+			for i, attempts := range allTent {
+				fmt.Printf("Jogada %d: %v\n", i+1, attempts)
+			}
+			break
+		}
+	}
+}
